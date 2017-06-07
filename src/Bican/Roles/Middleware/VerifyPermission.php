@@ -39,6 +39,8 @@ class VerifyPermission
             return $next($request);
         }
 
-        throw new PermissionDeniedException($permission);
+        //throw new PermissionDeniedException($permission);
+        return response()->json(['status' => '403', 'data' => null, 'message' => 'You need '.$permission.' permission to access it.'], 403);
+
     }
 }
