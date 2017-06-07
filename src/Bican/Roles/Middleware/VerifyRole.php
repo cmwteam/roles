@@ -2,9 +2,9 @@
 
 namespace Bican\Roles\Middleware;
 
+use Bican\Roles\Exceptions\RoleDeniedException;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-use Bican\Roles\Exceptions\RoleDeniedException;
 
 class VerifyRole
 {
@@ -39,6 +39,7 @@ class VerifyRole
             return $next($request);
         }
 
-        throw new RoleDeniedException($role);
+        //throw new RoleDeniedException($role);
+        return response()->json(['status' => '403', 'data' => null, 'message' => 'You need ' . $role . ' Role to access it.'], 403);
     }
 }
